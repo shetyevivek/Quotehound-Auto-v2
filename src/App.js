@@ -27,6 +27,7 @@ class App extends Component {
       entrance_url: document.referrer,
 
       zip_code: '',
+      car_year: ''
     }
   }
 
