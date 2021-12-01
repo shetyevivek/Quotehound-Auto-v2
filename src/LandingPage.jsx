@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 
 import Logo from './Assets/qhlogo.png';
+import ZipCodeData from "./Assets/zipcode-data.json";
+import zipcodeList from "./Assets/zipCodes";
 
 
 import Money from './Assets/Money.svg';
@@ -26,6 +28,7 @@ class LandingPage extends Component {
     this.nextStep = this.nextStep.bind(this);
     this.nextStep = this.nextStep.bind(this);
   }
+
 
 
   nextStep (values) {
@@ -60,7 +63,16 @@ class LandingPage extends Component {
     document.getElementById('zipCode').focus();
   }
 
+  componentDidMount = () => {
+
+
+  }
+
     render() {
+
+      const list = this.state.zipcodes;
+
+      
         return (
             <div>
               

@@ -8,18 +8,16 @@ import './forms.css';
 function nextStep(values) {
 
     values.preventDefault();
-    
     let value = values.currentTarget.dataset.value
     alert(value)
 }
 
-function select() {
+function select(values) {
 
-    let selectedYear = document.getElementById('selectYears').value;
-    alert(selectedYear)
-
-
-
+    
+    values.preventDefault();
+    let selectedYear = values.currentTarget.dataset.value
+    console.log(selectedYear)
 }
 function CarYear() {
 
@@ -30,7 +28,7 @@ function CarYear() {
     const [currentData, setCurrentData] = useState('');
     const [currentData2, setCurrentData2] = useState('');
 
-    useEffect(async () => {
+    useEffect( async () => {
 
         var apiToken = '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9';
 
@@ -98,7 +96,7 @@ function CarYear() {
                                                 if (latestYear - data.year < 24) {
                                                     return (
 
-                                                        <button onClick={nextStep} className="dateButton bg-blue-500 rounded text-white font-bold" data-value={data.year} value={data.year}>
+                                                        <button onClick={nextStep} key={data.year} className="dateButton bg-blue-500 rounded text-white font-bold" data-value={data.year} value={data.year}>
                                                             {data.year}
                                                         </button>
                                                     )
@@ -112,17 +110,15 @@ function CarYear() {
                                     <div className="mb-6 w-1/2 m-auto">
                                         <label className="block text-gray-500 text-sm font-semibold mb-2" >Other Years</label>
                                         <div className="relative">
-                                        <select className="appearance-none w-full text-center p-4 text-md font-semibold leading-none bg-gray-50 rounded outline-none" name="field-name">
+                                        <select className="appearance-none w-full text-center p-4 text-md font-semibold leading-none bg-gray-50 rounded outline-none" name="field-name" placeholder='select another year'   id="selectYears">
                                             {remainingYears.map((data, index) => {
 
                                                 return (
                                      <option 
                                      className="text-red" 
-                                     value={data.year} 
-                                     data-value={data.year} 
-                                     placeholder="-- Select Another Year --" 
+                                     key={data.year}
+                                     data-value={data.year}
                                      onChange={() => select(data.year)}
-                                     id="selectYears"
                                      > 
                                      
                                         {data.year}
