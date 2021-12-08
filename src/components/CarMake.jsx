@@ -7,67 +7,69 @@ import axios from 'axios'
 import './forms.css';
 
 
+function CarMake(props) {
 
-function CarYear() {
-    const history = useHistory();
+    const [make, setMake] = useState([])
+    const [remainingMake, setRemainingMake] = useState([])
+    const [latestMake, setLatestMake] = useState()
+
 
     const urlSearch = window.location.search;
 
     const urlParams = new URLSearchParams(urlSearch);
+    const carYear = urlParams.get('car_year');
     const zipCode = urlParams.get('zip_code');
 
-    function nextStep(values) {
-        values.preventDefault();
-        let value = values.currentTarget.dataset.value;
-        
-        document.getElementById('carYear').value = value;
-        history.push('/car-make' + '?zip_code' + zipCode +  '&car_year=' + value)
-    }
+  
 
-    function select(event) {
-
-
-        console.log(event.target.value);
-
-        var carYear = event.target.value;
-        document.getElementById('carYear').value = carYear;
-
-        history.push('/car-make' + '?car_year=' + carYear)
-
-
-    }
-
-    const [year, setYears] = useState([]);
-    const [remainingYears, setRemainingYears] = useState([]);
-    const [latestYear, setLatestYear] = useState();
-    const [flag, setFlag] = useState(true);
-    const [currentData, setCurrentData] = useState('');
-    const [currentData2, setCurrentData2] = useState('');
 
     useEffect(async () => {
-
-        var apiToken = '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9';
-
-        let data = await axios.get('https://carmakemodeldb.com/api/v1/car-lists/get/years' + '?api_token=' + apiToken);
-
-        let t = [];
-
-        for (let i = data.data.length - 1; i > -1; i--) {
-            t.push(data.data[i])
+        var apiToken =
+          '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9'
+        let data = await axios.get(
+          'https://carmakemodeldb.com/api/v1/car-lists/get/makes' + '/' + carYear + '?api_token=' +
+            apiToken
+        )
+        let t = []
+        for (let i = 0; i < data.data.length; i++) {
+          t.push(data.data[i])
+          
         }
+        
+        const rY = t.filter((f, index) => (index >= 16 ? f : ''))
+        setRemainingMake(rY)
+     
+        
+        
+        setMake(t)
+         setLatestMake(t[0].make)
+         
+    
+        
+      }, [])
 
-        const rY = t.filter((f, index) => index >= 24 ? f : '')
+      const history = useHistory();
 
-        setRemainingYears(rY);
-        setYears(t)
-        setLatestYear(t[0].year);
-    }, [])
+      function nextStep(values) {
+
+          values.preventDefault();
+          let value = values.currentTarget.dataset.value;   
+          document.getElementById('carMake').value = value;
+          history.push('/car-model' + '?zip_code' + zipCode +  '&car_year=' + carYear + '&car_make=' + value)
+
+      }
+
+      function select(event) {
+
+        var carMake = event.target.value;
+        document.getElementById('carMake').value = carMake;
+        history.push('/car-model' + '?zip_code' + zipCode +  '&car_year=' + carYear + '&car_make=' + carMake)
+
+      }
 
 
-
-    return (
-
-        <div className="back bg-white">
+      return(
+<div className="back bg-white">
             <div className="bg-blue-500 headerText justify-center align-middle text-center">
                 <h2>Drivers Save Up to <b>$500</b>/Year</h2>
             </div>
@@ -98,50 +100,50 @@ function CarYear() {
                             <div>
                                 <div className="relative flex justify-center text-sm leading-5 con">
                                     <span className="px-2 text-black-500 text-3xl bold header">
-                                        What Year Is Your Vehicle?
+                                        What Make Is Your Vehicle?
                                     </span>
                                 </div>
                             </div>
-                            <form onSubmit={nextStep} >
+                            <form >
                                 <div className="mt-6">
                                     <div className="w-full flex text-sm leading-5">
 
                                         <div className="text-sm leading-5 buttonBlockRow">
 
-                                            {year && latestYear && year.map((data, index) => {
-                                                if (latestYear - data.year < 24) {
-                                                    return (
-
-                                                        <button onClick={nextStep} key={data.year} className="dateButton bg-blue-500 rounded text-white font-bold" data-value={data.year} value={data.year}>
-                                                            {data.year}
-                                                        </button>
-                                                    )
-                                                }
-                                            })}
-                                        </div>
+                                           {make && latestMake && make.map((data, index) => {
+                                               if(index <  16){
+                                                   return (
+                                                    <button key={data.make}   onClick={nextStep} className="monthButton bg-blue-500 rounded text-white font-bold" data-value={data.make} value={data.make}>
+                                                    <span>{data.make}</span>
+                                                </button>
+                                                   
+                                                )
+                                               }
+                                           })}
+                                         </div>
 
 
                                     </div>
 
                                     <div className="mb-6 w-1/2 m-auto">
-                                        <label className="block text-gray-500 text-sm font-semibold mb-2" >Other Years</label>
+                                        <label className="block text-gray-500 text-sm font-semibold mb-2" >Other Makes</label>
                                         <div className="relative">
 
                                             <select
-                                                onChange={select}
-                                                className="appearance-none w-full text-center p-4 text-md font-semibold leading-none bg-gray-50 rounded outline-none"
+                                                
+                                                className="appearance-none w-full text-center p-4 text-md font-semibold leading-none bg-gray-50 rounded outline-none form-select"
                                                 name='field-name'
-                                                placeholder="Select another year"
-                                                id='selectYears'
+                                                onChange={select}
+                                                
                                             >
 
-                                                {remainingYears.map((data, index) => {
+                                                {remainingMake.map((data, index) => {
                                                     return (
                                                         <option
-                                                            key={data.year}
-                                                            value={data.year}
+                                                            key={data.make}
+                                                            value={data.make}
                                                         >
-                                                            {data.year}
+                                                            {data.make}
                                                         </option>
                                                     )
                                                 })}
@@ -167,11 +169,8 @@ function CarYear() {
             </div >
         </div >
 
-    )
-
+        )
 
 }
 
-
-export default withRouter(CarYear)
-
+export default withRouter(CarMake)
