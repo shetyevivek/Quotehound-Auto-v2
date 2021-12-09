@@ -123,7 +123,7 @@ class EmailPhone extends Component {
 
        let url = window.location.href;
 
-       document.getElementById('url').value = url; 
+       //document.getElementById('url').value = url; 
 
     this.props.setURL(url)
 
