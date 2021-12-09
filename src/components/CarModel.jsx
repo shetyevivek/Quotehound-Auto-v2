@@ -49,17 +49,16 @@ function CarModel(props){
         
         let value = values.currentTarget.dataset.value;
 
-        document.getElementById('carModel').value = value;
 
-        history.push('/primary-use'+ '?zip_code' + zipCode +  '&car_year=' + carYear + '&car_model' + carMake + '&car_make=' + value)
+        history.push('/primary-use'+ '?zip_code=' + zipCode +  '&car_year=' + carYear + '&car_model=' + carMake + '&car_make=' + value)
 
     }
 
     function select(event) {
+        
         var carModel = event.target.value;
 
-        document.getElementById('carModel').value = carModel;
-        history.push('/primary-use'+ '?zip_code' + zipCode +  '&car_year=' + carYear + '&car_model' + carMake + '&car_make=' + carModel)
+        history.push('/primary-use'+ '?zip_code=' + zipCode +  '&car_year=' + carYear + '&car_model=' + carMake + '&car_make=' + carModel)
 
     }
  
@@ -77,13 +76,13 @@ function CarModel(props){
 
                             <div className="text-right">
                                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
-                                    1%
+                                    25%
                                 </span>
                             </div>
                         </div>
                         <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-100">
 
-                            <div style={{ width: "1%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                            <div style={{ width: "25%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
 
                         </div>
                     </div>

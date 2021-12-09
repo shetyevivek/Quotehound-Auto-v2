@@ -20,8 +20,8 @@ function CarYear() {
         values.preventDefault();
         let value = values.currentTarget.dataset.value;
         
-        document.getElementById('carYear').value = value;
-        history.push('/car-make' + '?zip_code' + zipCode +  '&car_year=' + value)
+        console.log('car year is: ' + document.getElementById('carYear').value)
+        history.push('/car-make' + '?zip_code=' + zipCode +  '&car_year=' + value)
     }
 
     function select(event) {
@@ -30,9 +30,8 @@ function CarYear() {
         console.log(event.target.value);
 
         var carYear = event.target.value;
-        document.getElementById('carYear').value = carYear;
 
-        history.push('/car-make' + '?car_year=' + carYear)
+        history.push('/car-make' + '?zip_code=' + zipCode  + '&car_year=' + carYear)
 
 
     }
@@ -80,13 +79,13 @@ function CarYear() {
 
                             <div className="text-right">
                                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
-                                    1%
+                                    12%
                                 </span>
                             </div>
                         </div>
                         <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-100">
 
-                            <div style={{ width: "1%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
+                            <div style={{ width: "12%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div>
 
                         </div>
                     </div>
