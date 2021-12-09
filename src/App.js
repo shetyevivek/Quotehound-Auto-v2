@@ -20,6 +20,14 @@ import Credit from './components/Credit';
 import TicketsClaims from './components/TicketsClaims';
 import SR22 from './components/SR22';
 import ActiveLicense from './components/ActiveLicense';
+import Homeowner from './components/Homeowner';
+import Month from './components/Month';
+import Day from './components/Day';
+import Year from './components/Year';
+import Address from './components/Address';
+import Name from './components/Name';
+import EmailPhone from './components/EmailPhone';
+import ThankYou from './components/ThankYou';
 class App extends Component {
 
 
@@ -42,7 +50,15 @@ class App extends Component {
       '/credit',
       '/tickets-claims',
       '/sr-22',
-      '/active-license'
+      '/active-license',
+      '/homeowner',
+      '/month',
+      '/day',
+      '/year',
+      '/addres',
+      '/name',
+      '/email-phone',
+      '/thank-you'
     ],
 
     postData: {
@@ -324,6 +340,181 @@ class App extends Component {
               />
             </Route>
 
+            <Route path='/homeowner' exact>
+
+              <Homeowner
+
+                setHome={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      homeowner: v,
+                    }
+                  })
+                }}
+              />
+
+            </Route>
+
+            <Route path='/month' exact>
+
+            <Month
+            setMonth={(v) => {
+            this.setState({
+            postData: {
+            ...this.state.postData,
+            month: v,
+          },
+          });
+
+          }}
+            />
+
+         </Route>
+
+      
+
+<Route path='/day' exact>
+
+<Day
+
+  setDate={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        date: v,
+      },
+    });
+  }}
+
+/>
+</Route>
+
+
+
+<Route path='/year' exact >
+
+<Year
+
+  setYear={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        year: v,
+      },
+    });
+  }}
+
+  setDOB={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        dob: v,
+      },
+
+    });
+  }}
+/>
+</Route>
+
+ 
+
+<Route path='/address' exact>
+
+<Address
+  setAddress={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        address: v,
+      },
+    });
+  }}
+/>
+</Route>
+
+
+
+<Route path='/name' exact>
+
+<Name
+
+
+  setFName={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        first_name: v,
+      },
+    });
+
+
+  }}
+
+  setLName={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        last_name: v,
+      },
+    });
+  }}
+
+
+
+
+
+
+/>
+
+ 
+</Route>
+
+<Route path='/email-phone' exact>
+
+<EmailPhone
+
+  email_address={this.state.postData.email_address}
+  phone_home={this.state.postData.phone_home}
+
+  setEmail={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        email_address: v,
+      },
+    });
+  }}
+
+  setPhone={(v) => {
+    this.setState({
+      postData: {
+
+        ...this.state.postData,
+        phone_home: v,
+      },
+    });
+  }}
+
+  setURL={(v) => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        entrance_url: v,
+      }
+    })
+  }}
+
+
+  postData={this.state.postData}
+
+
+/>
+</Route>
+
+<Route>
+  <ThankYou />
+</Route>
           </Switch>
         </div>
       </BrowserRouter>
