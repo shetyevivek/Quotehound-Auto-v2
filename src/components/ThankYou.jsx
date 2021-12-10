@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import MA from '../MA';
 
 
 import './forms.css';
@@ -39,9 +40,10 @@ class ThankYou extends Component {
             </div>
           
           </div>
+          <MA />
 
 
-          </div>. 
+          </div>
 
 
           </div>

@@ -95,7 +95,7 @@ class LandingPage extends Component {
   <div className="relative z-10 container px-4 mx-auto">
     <div className="max-w-4xl pt-20">
       
-      <h2 className="mt-8 mb-8 text-5xl lg:text-7xl text-white font-bold" data-config-id="header">Compare Multiple Home Insurance Quotes</h2>
+      <h2 className="mt-8 mb-8 text-5xl lg:text-7xl text-white font-bold" data-config-id="header">Compare Multiple Auto Insurance Quotes</h2>
       <form onSubmit={this.nextStep} >
 
 <div className="flex justify items-center formSection py-10">
