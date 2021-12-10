@@ -23,6 +23,8 @@ class Name extends Component {
 
     nextStep = (values) => {
 
+        values.preventDefault();
+
         let firstName = document.getElementById('firstName').value;
         let lastName = document.getElementById('lastName').value;
        
@@ -149,7 +151,7 @@ unhide(){
                                             </span>
                                         </div>
                                     </div>
-                                    <form onSubmit={this.nextStep} >
+                                    <form >
                                         <div className="mt-6">
                                             <div className="w-full flex text-sm leading-5">
 

@@ -31,6 +31,8 @@ class EmailPhone extends Component {
     }
 
     onFinish = (values) => {
+    
+        values.preventDefault();
 
         let email = document.getElementById('email_address').value;
         let phone = document.getElementById('phone_home').value;
@@ -38,7 +40,7 @@ class EmailPhone extends Component {
 
         var realPhone = phone.replace(/[0-9]/g, '');
 
-        document.getElementById('tele').value = phone;
+        //document.getElementById('tele').value = phone;
 
 
         if(email.length < 2){
@@ -308,7 +310,7 @@ class EmailPhone extends Component {
                                         </label>
                                         </p>
                                           
-                                            <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 " type="submit" onClick={this.postURL} hidden={true} id="next">Get My Quote!</button>
+                                            <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 " type="submit"  hidden={true} id="next">Get My Quote!</button>
 
                                         </div>
                                        

@@ -62,15 +62,15 @@ class App extends Component {
     ],
 
     postData: {
-      lp_campaign_id: '615db3dcbc748',
-      lp_campaign_key: 'TFWr3YVyjdHx9qcgnCbK',
+      lp_campaign_id: '60ec8f7a44bdb',
+      lp_campaign_key: 'ZLdtcNvV7nMghTG2PHpy',
       TCPA_Consent: 'Yes',
       TCPA_Language: 'By hitting Get My Free Quote above, I provide my express written consent to the following. Telemarketing calls, text messages, emails, and postal mail from this Web site, our marketing and re-marketing network, and up to eight insurance companies or their affiliates or representatives at the phone number (including wireless number), email address, and postal address provided by me. Telemarketing calls, text messages, emails, and postal mail (including wireless number), email address, and postal address provided by me. Calls and text messages transmitting insurance quotes, or seeking related additional information from me, using an Automated Telephone Dialing System or prerecorded or artificial voices. Electronic video monitoring and recordation of my activities on this Site. I also understand that my agreement to be contacted is not a condition of purchasing any property, goods, or services and that I may call (855) 701-3066 to speak with someone about obtaining an insurance quote. I acknowledge that I may revoke my consent by emailing “STOP” to optout@quotehound.com. I affirm that I have read and agree to this websites Privacy Policy and Terms of Use',
       trusted_form_cert_id: '',
       jornaya_lead_id: '',
       landing_page: 'auto.quotehound.com',
       useragent: navigator.userAgent,
-      entrance_url: document.referrer,
+      entrance_url: '',
 
       zip_code: '',
       vehicle_year: '',
@@ -89,7 +89,7 @@ class App extends Component {
       desired_coverage_level: '',
       vehicle_ownership: '',
       additional_vehicles: 'no',
-      contiunous_coverage: '',
+      contiunous_coverage: '1 Year',
       active_license: '',
       tickets_or_claims_in_last_three_years: '',
       ever_filed_sr22: '',
@@ -103,8 +103,32 @@ class App extends Component {
       dui: '',
       lp_caller_id: '',
       gclid: '',
-    }
-  }
+    },
+  };
+
+
+
+  copyValuesToPostData2 = () => {
+    var tempArray = {
+      zip: this.state.postData.zip_code,
+    };
+    this.setState({ postData2: tempArray });
+    // var MediaAlphaExchange = { 
+    // 	"data": {
+    // 	   "zip": "",
+    // 	},
+    // 	"placement_id": "YiPFAJc_r0i9fsZr0uP7vvicsinK3Q",
+    // 	"sub_1": "test sub id",
+    // 	"type": "ad_unit",
+    // 	"version": 17
+    //  };
+    console.log("SetMA");
+    //MediaAlphaExchange__load('mediaalpha_placeholder');
+    return this.state.postData2;
+  };
+
+
+
 
   changeRoute = () => {
     this.setState({
@@ -128,6 +152,8 @@ class App extends Component {
                   this.setState({
                     postData: {
                       ...this.state.postData,
+                      jornaya_lead_id: document.getElementById('leadid_token').value,
+                      trusted_form_cert_id: document.getElementById('xxTrustedFormToken_0').value,
                       zip_code: v,
                     },
                   });
@@ -136,19 +162,11 @@ class App extends Component {
               />
             </Route>
 
-            <Route path='/car-year' exact>
-              <CarYear
+            <Route path='/car-year' component={CarYear} exact />
 
-              />
-            </Route>
+            <Route path='/car-make' component={CarMake} exact />
 
-            <Route path='/car-make' exact>
-              <CarMake />
-            </Route>
-
-            <Route path='/car-model' exact>
-              <CarModel />
-            </Route>
+            <Route path='/car-model' component={CarModel} exact />
 
             <Route path='/primary-use' exact>
               <PrimaryUse
@@ -160,8 +178,8 @@ class App extends Component {
                       vehicle_year: document.getElementById('carYear').value,
                       vehicle_make: document.getElementById('carMake').value,
                       vehicle_model: document.getElementById('carModel').value,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
             </Route>
@@ -173,9 +191,9 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       annual_mileage: v,
-                    }
+                    },
 
-                  })
+                  });
                 }}
               />
 
@@ -190,9 +208,9 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       desired_coverage_level: v,
-                    }
+                    },
 
-                  })
+                  });
                 }}
               />
 
@@ -205,9 +223,9 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       vehicle_ownership: v,
-                    }
+                    },
 
-                  })
+                  });
                 }}
               />
             </Route>
@@ -219,8 +237,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       has_insurance: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
 
@@ -233,8 +251,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       current_insurance_provider: v
-                    }
-                  })
+                    },
+                  });
                 }}
               />
             </Route>
@@ -247,8 +265,8 @@ class App extends Component {
 
                       ...this.state.postData,
                       gender: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
             </Route>
@@ -260,8 +278,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       married: v,
-                    }
-                  })
+                    },
+                  });
                 }}
 
               />
@@ -274,8 +292,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       education_level: v,
-                    }
-                  })
+                    },
+                  });
                 }}
 
               />
@@ -291,8 +309,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       credit_score: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
 
@@ -305,8 +323,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       tickets_or_claims_in_last_three_years: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
 
@@ -319,8 +337,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       ever_filed_sr22: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
 
@@ -334,8 +352,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       active_license: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
             </Route>
@@ -349,8 +367,8 @@ class App extends Component {
                     postData: {
                       ...this.state.postData,
                       homeowner: v,
-                    }
-                  })
+                    },
+                  });
                 }}
               />
 
@@ -358,165 +376,158 @@ class App extends Component {
 
             <Route path='/month' exact>
 
-            <Month
-            setMonth={(v) => {
-            this.setState({
-            postData: {
-            ...this.state.postData,
-            month: v,
-          },
-          });
+              <Month
+                setMonth={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      month: v,
+                    },
+                  });
 
-          }}
-            />
+                }}
+              />
 
-         </Route>
-
-      
-
-<Route path='/day' exact>
-
-<Day
-
-  setDate={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        date: v,
-      },
-    });
-  }}
-
-/>
-</Route>
+            </Route>
 
 
 
-<Route path='/year' exact >
+            <Route path='/day' exact>
 
-<Year
+              <Day
 
-  setYear={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        year: v,
-      },
-    });
-  }}
+                setDate={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      date: v,
+                    },
+                  });
+                }}
 
-  setDOB={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        dob: v,
-      },
-
-    });
-  }}
-/>
-</Route>
-
- 
-
-<Route path='/address' exact>
-
-<Address
-  setAddress={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        address: v,
-      },
-    });
-  }}
-/>
-</Route>
+              />
+            </Route>
 
 
 
-<Route path='/name' exact>
+            <Route path='/year' exact >
 
-<Name
+              <Year
 
+                setYear={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      year: v,
+                    },
+                  });
+                }}
 
-  setFName={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        first_name: v,
-      },
-    });
+                setDOB={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      dob: v,
+                    },
 
-
-  }}
-
-  setLName={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        last_name: v,
-      },
-    });
-  }}
-
-
+                  });
+                }}
+              />
+            </Route>
 
 
 
+            <Route path='/address' exact>
 
-/>
-
- 
-</Route>
-
-<Route path='/email-phone' exact>
-
-<EmailPhone
-
-  email_address={this.state.postData.email_address}
-  phone_home={this.state.postData.phone_home}
-
-  setEmail={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        email_address: v,
-      },
-    });
-  }}
-
-  setPhone={(v) => {
-    this.setState({
-      postData: {
-
-        ...this.state.postData,
-        phone_home: v,
-      },
-    });
-  }}
-
-  setURL={(v) => {
-    this.setState({
-      postData: {
-        ...this.state.postData,
-        entrance_url: v,
-      }
-    })
-
-    console.log(this.state.postData)
-  }}
+              <Address
+                setAddress={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      address: v,
+                    },
+                  });
+                }}
+              />
+            </Route>
 
 
-  postData={this.state.postData}
+
+            <Route path='/name' exact>
+
+              <Name
 
 
-/>
-</Route>
+                setFName={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      first_name: v,
+                    },
+                  });
 
-<Route path='/thank-you' exact>
-  <ThankYou />
-</Route>
+
+                }}
+
+                setLName={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      last_name: v,
+                    },
+                  });
+
+                  console.log(this.state.postData)
+
+                }}
+              />
+            </Route>
+
+            <Route path='/email-phone' exact>
+
+              <EmailPhone
+
+                email_address={this.state.postData.email_address}
+                phone_home={this.state.postData.phone_home}
+
+                setEmail={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      email_address: v,
+                    },
+                  });
+                }}
+
+                setPhone={(v) => {
+                  this.setState({
+                    postData: {
+
+                      ...this.state.postData,
+                      phone_home: v,
+                    },
+                  });
+                }}
+
+                setURL={(v) => {
+                  this.setState({
+                    postData: {
+                      ...this.state.postData,
+                      entrance_url: v,
+                    }
+                  })
+
+                  console.log(this.state.postData)
+                }}
+
+
+                postData={this.state.postData}
+              />
+            </Route>
+
+            <Route path='/thank-you' exact>
+              <ThankYou />
+            </Route>
           </Switch>
         </div>
       </BrowserRouter>
