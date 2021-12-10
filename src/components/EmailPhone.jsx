@@ -40,10 +40,35 @@ class EmailPhone extends Component {
 
         document.getElementById('tele').value = phone;
 
+
+        if(email.length < 2){
+
+            toast.error("Please enter your email");
+
+            values.preventDefault();
+
+        }
+        if (phone.length < 10) {
+            toast.error("😬 Please enter your phone number");
+
+            values.preventDefault();
+        }
+        if(email.length < 2 && phone.length < 10) {
+            toast.error("😬 There is an error, check the fields!")
+        }
+        else {
+            values.preventDefault();
+
+            toast.dismiss();
+
+           
+        }
+
+
         const urlSearch = window.location.search;
 
         const urlParams = new URLSearchParams(urlSearch);
-    
+
         const zip = urlParams.get('zip_code');
         const lp = urlParams.get('lp_request_id')
         const carYear = urlParams.get('car_year');
@@ -69,65 +94,49 @@ class EmailPhone extends Component {
         const year = urlParams.get('year');
         const dob = urlParams.get('dob');
         const address = urlParams.get('address')
-        const fName = urlParams.get('first_name');
-        const lName = urlParams.get('last_name');
-  
+        const firstName = urlParams.get('first_name');
+        const lastName = urlParams.get('last_name')
 
- 
+       
+        
         this.setState({
             loading: true 
-          }, this.postAutoInsurance(this.props.postData));
+          }, this.postFinalExpense(this.props.postData));
+        
+          this.props.history.push('/thank-you'  + '?zip_code=' + zipCode + '&car_year=' + carYear + '&car_model=' + carModel + '&car_make=' + carMake + '&primary_usage=' + use + '&annual_mileage=' + miles + '&desired_coverage_level=' + cover + '&vehicle_ownership=' + own + '&has_insurance=' + has + '&current_insurance_provider=' + current + '&gender=' + gender + '&married=' + married + '&education_level=' + education + '&credit_score=' + credit + '&tickets_or_claims_in_last_three_years=' + tc + '&ever_filed_sr22=' + sr + '&active_license=' + al + '&homeowner=' + ho + '&month=' + month + '&day=' + day + '&year=' + year + '&dob=' + dob + '&address=' + address + '&first_name=' + firstName + '&last_name=' + lastName + '&email=' + email + '&phone_home=' + phone); 
 
-          console.log('state was set')
-
-          this.props.history.push('/thank-you' + '?zip_code=' + zipCode + '&car_year=' + carYear + '&car_model=' + carModel + '&car_make=' + carMake + '&primary_usage=' + use + '&annual_mileage=' + miles + '&desired_coverage_level=' + cover + '&vehicle_ownership=' + own + '&has_insurance=' + has + '&current_insurance_provider=' + current + '&gender=' + gender + '&married=' + married + '&education_level=' + education + '&credit_score=' + credit + '&tickets_or_claims_in_last_three_years=' + tc + '&ever_filed_sr22=' + sr + '&active_license=' + al + '&homeowner=' + ho + '&month=' + month + '&day=' + day + '&year=' + year + '&dob=' + dob + '&address=' + address + '&first_name=' + fName + '&last_name=' + lName +  '&email=' + email + '&phone_number=' + phone)
     };
 
     postURL = (values) => {
 
-        values.preventDefault();
-        
         const urlSearch = window.location.search;
 
         const urlParams = new URLSearchParams(urlSearch);
-    
-        const zip = urlParams.get('zip_code');
-        const lp = urlParams.get('lp_request_id')
-        const carYear = urlParams.get('car_year');
-        const zipCode = urlParams.get('zip_code');
-        const carMake = urlParams.get('car_make');
-        const carModel = urlParams.get('car_model')
-        const use = urlParams.get('primary_usage');
-        const miles = urlParams.get('annual_mileage');
-        const cover = urlParams.get('desired_coverage_level');
-        const own = urlParams.get('vehicle_ownership');
-        const has = urlParams.get('has_insurance');
-        const current = urlParams.get('current_insurance_provider');
-        const gender = urlParams.get('gender');
-        const married = urlParams.get('married');
-        const education = urlParams.get('education_level');
-        const credit = urlParams.get('credit_score');
-        const tc = urlParams.get('tickets_or_claims_in_last_three_years');
-        const sr = urlParams.get('ever_filed_sr22');
-        const al = urlParams.get('active_license');
-        const ho = urlParams.get('homeowner');
-        const month = urlParams.get('month');
-        const day = urlParams.get('day')
-        const year = urlParams.get('year');
-        const dob = urlParams.get('dob');
-        const address = urlParams.get('address')
-        const fName = urlParams.get('first_name');
-        const lName = urlParams.get('last_name');
-        let email = document.getElementById('email_address').value;
+
         let phone = document.getElementById('phone_home').value;
+
+        const zip = urlParams.get('zip');
+        const gender = urlParams.get('gender');
+        const coverage = urlParams.get('coverage');
+        const month = urlParams.get('month');
+        const date = urlParams.get('date');
+        const year = urlParams.get('year');
+        const address = urlParams.get('address');
+        const firstName = urlParams.get('first_name');
+        const lastName = urlParams.get('last_name');
+        let email = document.getElementById('email_address').value;
 
        let url = window.location.href;
 
-       //document.getElementById('url').value = url; 
+       console.log(url)
 
-    this.props.setURL(url)
+       if(phone.length < 7){
+           toast.error('Please enter a correct Phone')
+           document.getElementById('next').hidden = true;
 
-    this.props.history.push('/thank-you' + '?zip_code=' + zipCode + '&car_year=' + carYear + '&car_model=' + carModel + '&car_make=' + carMake + '&primary_usage=' + use + '&annual_mileage=' + miles + '&desired_coverage_level=' + cover + '&vehicle_ownership=' + own + '&has_insurance=' + has + '&current_insurance_provider=' + current + '&gender=' + gender + '&married=' + married + '&education_level=' + education + '&credit_score=' + credit + '&tickets_or_claims_in_last_three_years=' + tc + '&ever_filed_sr22=' + sr + '&active_license=' + al + '&homeowner=' + ho + '&month=' + month + '&day=' + day + '&year=' + year + '&dob=' + dob + '&address=' + address + '&first_name=' + fName + '&last_name=' + lName +  '&email=' + email + '&phone_number=' + phone)
+       }
+
+        this.props.setURL(url)
 
     }
 
@@ -148,6 +157,12 @@ class EmailPhone extends Component {
 
         console.log("updated phone is " + realPhone)
 
+          if(phone.length < 14){
+           document.getElementById('next').hidden = true;
+
+            return
+        }
+
         this.props.setPhone(realPhone);
         this.unhide();
 
@@ -159,19 +174,20 @@ class EmailPhone extends Component {
         let phone = document.getElementById('phone_home').value;
 
 
-       if(email.length == 0 || phone.length == 0){
+       if(email.length === 0 || phone.length === 0 && phone.length < 7){
            document.getElementById('next').hidden = true;
+
+          
        }
        else{
            toast.dismiss()
            document.getElementById('next').hidden = false;
 
        }
-
     }
 
 
-    postAutoInsurance = (postData) => {
+    postFinalExpense = (postData) => {
         console.log(postData);
         Axios.post("https://quotehound.leadspediatrack.com/post.do", null, {
           params: postData,
@@ -214,7 +230,7 @@ class EmailPhone extends Component {
             <div>
                 <div className="back bg-white">
                     <div className="bg-blue-500 headerText justify-center align-middle text-center">
-                        <h2>Get Your Free Auto Insurance Quote</h2>
+                        <h2>Get Your Free Auto Quote</h2>
                     </div> 
                     <div className="bg-white rounded-lg shadow-xl sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden m-12 formDiv content-center">
                         <div className="px-4 py-8 sm:px-10">
@@ -255,7 +271,7 @@ class EmailPhone extends Component {
                                     <div>
                                         <div className="relative flex justify-center text-sm leading-5 con">
                                             <span className="px-2 text-black-500 text-3xl bold header">
-                                                {firstName}, Last Step!
+                                                You're Almost There, {firstName}!
                                             </span>
                                         </div>
                                     </div>
@@ -287,13 +303,15 @@ class EmailPhone extends Component {
 
                                                
                                             </div>
-
+                                            <p className="tcpa"> <label for="leadid_tcpa_disclosure">   <input type="hidden" id="leadid_tcpa_disclosure" /> By hitting Get My No Cost Quote below, I provide my express written consent to the following. Telemarketing calls, text messages, emails, and postal mail from this Web site, our <a href="https://www.quotehound.com/partners"> marketing </a>nd re-marketing network, and up to eight insurance companies or their affiliates or representatives at the phone number (including wireless number), email address, and postal address provided by me. Telemarketing calls, text messages, emails, and postal mail (including wireless number), email address, and postal address provided by me. Calls and text messages transmitting insurance quotes, or seeking related additional information from me, using an Automated Telephone Dialing System or prerecorded or artificial voices.  Electronic video monitoring and recordation of my activities on this Site. I also understand that my agreement to be contacted is not a condition of purchasing any property, goods, or services and that I may call (888) 292-2361 to speak with someone about obtaining an insurance quote.  I acknowledge that I may revoke my consent by emailing “STOP” to  <a href="mailto:optout@quotehound.com">optout@quotehound.com.</a> I affirm that I have read and agree to this website's <a href="https://www.quotehound.com/privacy-policy"> Privacy Policy </a> and  <a href="https://www.quotehound.com/terms-conditions">Terms of Use</a>
+                                        
+                                        </label>
+                                        </p>
                                           
-                                            <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 nextButton" id="next" type="submit" onClick={this.postURL} hidden={true} >Get My Free Quote!</button>
-
+                                            <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 " type="submit" onClick={this.postURL} hidden={true} id="next">Get My Quote!</button>
 
                                         </div>
-                                        <p className="tcpa">   <input type="hidden" id="leadid_tcpa_disclosure" /> By hitting Get My Free Quote above, I provide my express written consent to the following. Telemarketing calls, text messages, emails, and postal mail from this Web site, our <a href="https://www.quotehound.com/partners"> marketing </a> and re-marketing network, and up to eight insurance companies or their affiliates or representatives at the phone number (including wireless number), email address, and postal address provided by me. Telemarketing calls, text messages, emails, and postal mail (including wireless number), email address, and postal address provided by me. Calls and text messages transmitting insurance quotes, or seeking related additional information from me, using an Automated Telephone Dialing System or prerecorded or artificial voices. Electronic video monitoring and recordation of my activities on this Site. I also understand that my agreement to be contacted is not a condition of purchasing any property, goods, or services and that I may call (855) 701-3066 to speak with someone about obtaining an insurance quote.  I acknowledge that I may revoke my consent by emailing “STOP” to <a href="mailto:optout@quotehound.com">optout@quotehound.com.</a> I affirm that I have read and agree to this website's <a href="https://www.quotehound.com/privacy-policy"> Privacy Policy </a> and  <a href="https://www.quotehound.com/terms-conditions">Terms of Use</a></p>
+                                       
                                     </form>
 
                                 </div>
@@ -308,6 +326,7 @@ class EmailPhone extends Component {
 
 
                 </div>
+
             </div>
         )
     }
