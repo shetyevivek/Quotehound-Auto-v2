@@ -117,16 +117,34 @@ class EmailPhone extends Component {
 
         let phone = document.getElementById('phone_home').value;
 
-        const zip = urlParams.get('zip');
+
+        const zip = urlParams.get('zip_code');
+        const lp = urlParams.get('lp_request_id')
+        const carYear = urlParams.get('car_year');
+        const zipCode = urlParams.get('zip_code');
+        const carMake = urlParams.get('car_make');
+        const carModel = urlParams.get('car_model')
+        const use = urlParams.get('primary_usage');
+        const miles = urlParams.get('annual_mileage');
+        const cover = urlParams.get('desired_coverage_level');
+        const own = urlParams.get('vehicle_ownership');
+        const has = urlParams.get('has_insurance');
+        const current = urlParams.get('current_insurance_provider');
         const gender = urlParams.get('gender');
-        const coverage = urlParams.get('coverage');
+        const married = urlParams.get('married');
+        const education = urlParams.get('education_level');
+        const credit = urlParams.get('credit_score');
+        const tc = urlParams.get('tickets_or_claims_in_last_three_years');
+        const sr = urlParams.get('ever_filed_sr22');
+        const al = urlParams.get('active_license');
+        const ho = urlParams.get('homeowner');
         const month = urlParams.get('month');
-        const date = urlParams.get('date');
+        const day = urlParams.get('day')
         const year = urlParams.get('year');
-        const address = urlParams.get('address');
+        const dob = urlParams.get('dob');
+        const address = urlParams.get('address')
         const firstName = urlParams.get('first_name');
-        const lastName = urlParams.get('last_name');
-        let email = document.getElementById('email_address').value;
+        const lastName = urlParams.get('last_name')
 
        let url = window.location.href;
 
