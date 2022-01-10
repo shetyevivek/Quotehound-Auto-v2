@@ -48,7 +48,7 @@ class LandingPage extends Component {
     
     values.preventDefault();
         
-    let zipValue = document.getElementById('zipCode').value;
+    let zipValue = localStorage.getItem('zip');
 
     if(zipValue.length < 5){
         toast.error("😬 Please enter a valid zip code!");  
@@ -86,8 +86,8 @@ class LandingPage extends Component {
 
       const list = this.state.zipcodes;
 
-      const zippy = document.getElementById('zip').value;
-      const state = document.getElementById('state').value;
+      const zippy = localStorage.getItem('zip');
+      const state = localStorage.getItem('state');
  
 
       
