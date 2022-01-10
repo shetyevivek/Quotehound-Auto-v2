@@ -117,7 +117,7 @@ class LandingPage extends Component {
       <form onSubmit={this.nextStep} >
 
 <div className="flex justify items-center formSection py-10">
-                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zip} id="zipCode" maxLength={5} />
+                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" value={zip} id="zipCode" maxLength={5} />
                       
                       <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 zipSubmit" type="submit">Start My Quote</button>
                       
