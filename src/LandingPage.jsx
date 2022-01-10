@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router';
+
+import $ from 'jquery'; 
 
 import './LandingPage.css';
 
@@ -17,6 +19,8 @@ import Connect from './Assets/Connect.svg';
 import Form from './Assets/Form.svg';
 
 
+
+
 class LandingPage extends Component {
 
  
@@ -29,9 +33,20 @@ class LandingPage extends Component {
     this.nextStep = this.nextStep.bind(this);
   }
 
+  componentDidMount() {
+
+    this.editZip();
+  }
+
+  editZip = (values) => {
+
+  }
 
 
-  nextStep (values) {
+
+  nextStep(values) {
+    
+    values.preventDefault();
         
     let zipValue = document.getElementById('zipCode').value;
 
@@ -40,7 +55,9 @@ class LandingPage extends Component {
         
         values.preventDefault();
     }
-    else{
+    else {
+      
+     // this.props.validateZip(values);
 
       values.preventDefault();
 
@@ -63,14 +80,15 @@ class LandingPage extends Component {
     document.getElementById('zipCode').focus();
   }
 
-  componentDidMount = () => {
 
-
-  }
 
     render() {
 
       const list = this.state.zipcodes;
+
+      const zip = document.getElementById('zip').value;
+      const state = document.getElementById('state').value;
+ 
 
       
         return (
@@ -95,12 +113,14 @@ class LandingPage extends Component {
   <div className="relative z-10 container px-4 mx-auto">
     <div className="max-w-4xl pt-20">
       
-      <h2 className="mt-8 mb-8 text-5xl lg:text-7xl text-white font-bold" data-config-id="header">Compare Multiple Auto Insurance Quotes</h2>
+                  <h2 className="mt-8 mb-8 text-4xl lg:text-6xl text-white font-bold" data-config-id="header">Compare Multiple Auto Insurance Quotes In <span className='text-blue-300'>{state}</span></h2>
       <form onSubmit={this.nextStep} >
 
 <div className="flex justify items-center formSection py-10">
-<input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" value={this.state.value} id="zipCode" maxLength={5}/>
-<button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 zipSubmit" type="submit">Start My Quote</button>
+                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zip} id="zipCode" maxLength={5} />
+                      
+                      <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 zipSubmit" type="submit">Start My Quote</button>
+                      
 
 </div>
 
@@ -112,7 +132,7 @@ class LandingPage extends Component {
     <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-8 bg-white border-r overflow-y-auto">
       <div className="flex items-center mb-16 pr-6">
         <a className="ml-16 mr-auto text-xl text-blue-800 font-semibold leading-none" href="/" data-config-id="brand">
-          <img className="h-7" src={Logo} alt="" width="auto" al />
+          <img className="h-7" src={Logo} alt="" width="auto"/>
         </a>
       </div>
      

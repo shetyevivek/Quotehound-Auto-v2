@@ -5,6 +5,8 @@ import './forms.css';
 
 class ActiveLicense extends Component {
 
+
+
     nextStep = (values) => {
 
         values.preventDefault();
@@ -45,6 +47,8 @@ class ActiveLicense extends Component {
     }
 
     render() {
+
+        var city = localStorage.getItem('city')
         return (
             <div className="back bg-white">
                 <div className="bg-blue-500 headerText justify-center align-middle text-center">

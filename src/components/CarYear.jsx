@@ -62,13 +62,13 @@ function CarYear() {
         setLatestYear(t[0].year);
     }, [])
 
-
+    var city = localStorage.getItem('city')
 
     return (
 
         <div className="back bg-white">
             <div className="bg-blue-500 headerText justify-center align-middle text-center">
-                <h2>Drivers Save Up to <b>$500</b>/Year</h2>
+                <h2>Drivers in {city} Save Up to <b>$500</b>/Year</h2>
             </div>
             <div className="bg-white rounded-lg shadow-xl sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden m-12 formDiv content-center">
                 <div className="px-4 py-8 sm:px-10">
