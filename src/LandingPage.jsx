@@ -60,7 +60,7 @@ class LandingPage extends Component {
         crossDomain: true,
         method: 'GET',
         redirect: 'follow',
-        url:'http://ziptasticapi.com/' + zipVal
+        url:'https://ziptasticapi.com/' + zipVal
       };
 
       $.ajax(requestOptions).done(function(response){
