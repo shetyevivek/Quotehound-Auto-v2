@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { withRouter } from 'react-router';
 
 import $ from 'jquery'; 
+import { ziptastic } from 'jquery';
 
 import './LandingPage.css';
 
@@ -34,25 +35,58 @@ class LandingPage extends Component {
   }
   
 
-  validateZip(values) {
+  validateZip = (values) => {
 
     values.preventDefault();
-        
-    let zipValue = localStorage.getItem('zip');
+
+    let val = document.getElementById('zip').value;
     
-    if(zipValue.length < 5){
+    if(val.length < 5){
       toast.error("😬 Please enter a valid zip code!");  
-      
-      values.preventDefault();
+      return 
     }
-    this.nextStep(values)
+
+    else {
+
+      var ziptastic = require('ziptastic');
+
+      localStorage.setItem('zip', val);
+
+      let zipVal = localStorage.getItem('zip');
+
+
+      var requestOptions = {
+        async: true,
+        crossDomain: true,
+        method: 'GET',
+        redirect: 'follow',
+        url:'http://ziptasticapi.com/' + zipVal
+      };
+
+      $.ajax(requestOptions).done(function(response){
+        console.log(response);
+
+        var parse = JSON.parse(response);
+
+        let city = parse.city;
+        let state = parse.state;
+
+        localStorage.setItem('city', city);
+        localStorage.setItem('state', state);
+
+        document.getElementById('city').value = city;
+        document.getElementById('state').value = state;
+      })
+
+      
+
+    }
   }
 
 
 
   nextStep(values) {
     
-    values.preventDefault();
         
     let zipValue = localStorage.getItem('zip');
 
@@ -85,7 +119,7 @@ class LandingPage extends Component {
 
       const list = this.state.zipcodes;
 
-      const zippy = document.getElementById('zipCode').value;
+      const zippy = localStorage.getItem('zip');
       const state = localStorage.getItem('state');
  
 
@@ -107,6 +141,7 @@ class LandingPage extends Component {
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          limit={true, 1}
           theme={'colored'}
         />
   <div className="relative z-10 container px-4 mx-auto">
@@ -116,7 +151,7 @@ class LandingPage extends Component {
       <form onSubmit={this.nextStep} >
 
 <div className="flex justify items-center formSection py-10">
-                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zippy} onChange={this.validateZip} id="zipCode" maxLength={5} />
+                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none text-center bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zippy}  onChange={this.validateZip} id="zip" minLength={5} maxLength={5} />
                       
                       <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 zipSubmit" type="submit">Start My Quote</button>
                       
