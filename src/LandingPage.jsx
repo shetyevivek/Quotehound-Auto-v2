@@ -32,14 +32,20 @@ class LandingPage extends Component {
     this.nextStep = this.nextStep.bind(this);
     this.nextStep = this.nextStep.bind(this);
   }
+  
 
-  componentDidMount() {
+  validateZip(values) {
 
-    this.editZip();
-  }
-
-  editZip = (values) => {
-
+    values.preventDefault();
+        
+    let zipValue = localStorage.getItem('zip');
+    
+    if(zipValue.length < 5){
+      toast.error("😬 Please enter a valid zip code!");  
+      
+      values.preventDefault();
+    }
+    this.nextStep(values)
   }
 
 
@@ -50,13 +56,6 @@ class LandingPage extends Component {
         
     let zipValue = localStorage.getItem('zip');
 
-    if(zipValue.length < 5){
-        toast.error("😬 Please enter a valid zip code!");  
-        
-        values.preventDefault();
-    }
-    else {
-      
      // this.props.validateZip(values);
 
       values.preventDefault();
@@ -72,7 +71,7 @@ class LandingPage extends Component {
       console.log("updated props with value: ", zipValue);
 
       this.props.history.push('/car-year' +  '?zip_code=' +  zipValue);
-    }
+
       
   }
 
@@ -86,7 +85,7 @@ class LandingPage extends Component {
 
       const list = this.state.zipcodes;
 
-      const zippy = localStorage.getItem('zip');
+      const zippy = document.getElementById('zipCode').value;
       const state = localStorage.getItem('state');
  
 
@@ -117,7 +116,7 @@ class LandingPage extends Component {
       <form onSubmit={this.nextStep} >
 
 <div className="flex justify items-center formSection py-10">
-                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zippy} id="zipCode" maxLength={5} />
+                      <input className="appearance-none w-1/2 p-3 text-lg font-semibold leading-none bg-white rounded zipInput " type="text" name="addressField" placeholder="Zip Code" pattern="\d*" defaultValue={zippy} onChange={this.validateZip} id="zipCode" maxLength={5} />
                       
                       <button className="px-6 py-4 mb-3 m-2 text-md font-bold bg-blue-400 hover:bg-blue-600 hover:shadow-lg text-white rounded transition duration-200 zipSubmit" type="submit">Start My Quote</button>
                       
