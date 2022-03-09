@@ -24,15 +24,28 @@ function CarMake(props) {
 
 
     useEffect(async () => {
-        var apiToken =
+        /*var apiToken =
           '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9'
         let data = await axios.get(
           'https://carmakemodeldb.com/api/v1/car-lists/get/makes' + '/' + carYear + '?api_token=' +
             apiToken
-        )
+        )*/
+
+        const queryResult = await axios.post(
+            "http://localhost:4000/", {
+                query: `
+                query {
+                    CarMake {
+                      make
+                    }
+                  }
+                  `,
+                });
+                let data = queryResult.data.data.CarMake; 
+
         let t = []
-        for (let i = 0; i < data.data.length; i++) {
-          t.push(data.data[i])
+        for (let i = 0; i < data.length; i++) {
+          t.push(data[i])
           
         }
         

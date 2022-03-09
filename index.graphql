@@ -1,3 +1,0 @@
-schema @sdl(files: ["fedex/fedex.graphql"]) {
-  query: Query
-}
