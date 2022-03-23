@@ -14,7 +14,7 @@ function CarModel(props){
 
    
     useEffect(async () => {
-        var apiToken =
+        /*var apiToken =
           '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9'
         let data = await axios.get(
           'https://carmakemodeldb.com/api/v1/car-lists/get/models' +
@@ -24,10 +24,27 @@ function CarModel(props){
             carMake +
             '?api_token=' +
             apiToken
-        )
+        )*/
+
+        const queryResult = await axios.post(
+            "https://quotehound-auto-v2.herokuapp.com/", {
+                query: `
+                query {
+                    cars(year: "${carYear}") {
+                      get_car_models(make: "${carMake}") {
+                        CarModel {
+                          model
+                        }
+                      }
+                    }
+                  }
+                  `,
+                });
+                let data = queryResult.data.data.cars.get_car_models.CarModel;
+
         let t = []
-        for (let i = 0; i < data.data.length; i++) {
-          t.push(data.data[i])
+        for (let i = 0; i < data.length; i++) {
+          t.push(data[i])
         }
         const rY = t.filter((f, index) => (index >= 100 ? f : ''))
         setRemainingModel(rY)

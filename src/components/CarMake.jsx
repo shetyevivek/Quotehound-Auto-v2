@@ -32,16 +32,18 @@ function CarMake(props) {
         )*/
 
         const queryResult = await axios.post(
-            "http://localhost:4000/", {
+            "https://quotehound-auto-v2.herokuapp.com/", {
                 query: `
                 query {
-                    CarMake {
-                      make
+                    cars(year: "${carYear}") {
+                      CarMake {
+                        make
+                      }
                     }
                   }
                   `,
                 });
-                let data = queryResult.data.data.CarMake; 
+                let data = queryResult.data.data.cars.CarMake;
 
         let t = []
         for (let i = 0; i < data.length; i++) {
