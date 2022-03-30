@@ -7,7 +7,6 @@ import axios from 'axios'
 import './forms.css';
 
 
-
 function CarYear() {
     const history = useHistory();
 
@@ -45,14 +44,26 @@ function CarYear() {
 
     useEffect(async () => {
 
-        var apiToken = '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9';
+        /*var apiToken = '95JiMPpKIW8z6iRJlUWLdYtb5dIS5JGONBHSmkAvGCX2Tq7kbdhYMJZbFpD9';
 
-        let data = await axios.get('https://carmakemodeldb.com/api/v1/car-lists/get/years' + '?api_token=' + apiToken);
+        let data = await axios.get('https://carmakemodeldb.com/api/v1/car-lists/get/years' + '?api_token=' + apiToken);*/
+
+        const queryResult = await axios.post(
+            "https://quotehound-auto-v2.herokuapp.com/", {
+                query: `
+                query {
+                    CarYear {
+                      year
+                    }
+                  }
+                  `,
+                });
+                let data = queryResult.data.data.CarYear;
 
         let t = [];
 
-        for (let i = data.data.length - 1; i > -1; i--) {
-            t.push(data.data[i])
+        for (let i = data.length - 1; i > -1; i--) {
+            t.push(data[i])
         }
 
         const rY = t.filter((f, index) => index >= 24 ? f : '')
@@ -173,4 +184,3 @@ function CarYear() {
 
 
 export default withRouter(CarYear)
-
