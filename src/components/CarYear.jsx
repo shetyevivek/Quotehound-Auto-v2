@@ -49,7 +49,7 @@ function CarYear() {
         let data = await axios.get('https://carmakemodeldb.com/api/v1/car-lists/get/years' + '?api_token=' + apiToken);*/
 
         const queryResult = await axios.post(
-            "https://apollo-graphql-server-taupe.vercel.app/", {
+            "https://quotehound-auto-v2.graphcdn.app/", {
                 query: `
                 query {
                     CarYear {
