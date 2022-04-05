@@ -32,7 +32,7 @@ function CarMake(props) {
         )*/
 
         const queryResult = await axios.post(
-            "https://apollo-graphql-server-taupe.vercel.app/", {
+            "https://quotehound-auto-v2.graphcdn.app/", {
                 query: `
                 query {
                     cars(year: "${carYear}") {
